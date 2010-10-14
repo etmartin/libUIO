@@ -109,6 +109,7 @@ int line_from_file(char *filename, char *linebuf)
 	if (!file)
 		return -1;
 	s = fgets(linebuf,UIO_MAX_NAME_SIZE,file);
+	fclose(file);
 	if (!s)
 		return -2;
 	for (i=0; (*s)&&(i<UIO_MAX_NAME_SIZE); i++) {
