@@ -367,6 +367,8 @@ void *uio_mmap(struct uio_info_t* info, int map_num)
 	map_addr = mmap(NULL, info->maps[map_num].size,
 			       PROT_READ|PROT_WRITE, MAP_SHARED|MAP_LOCKED|MAP_POPULATE, fd,
 			       map_num * getpagesize());
+	if (map_addr == MAP_FAILED)
+		return MAP_FAILED;
 
 	/* fixup map_addr, cause mmap only maps hole pages */
 	offset = ((int64_t) info->maps[map_num].addr & (getpagesize() - 1));
